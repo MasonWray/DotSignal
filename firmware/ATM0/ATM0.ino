@@ -11,7 +11,13 @@ Adafruit_DotStar ds(1, 7, 8, DOTSTAR_BGR);
 uint8_t brightness = DEFAULT_BRIGHTNESS;
 
 // Define Colors
-uint32_t white = ds.gamma32(ds.Color(255, 255, 255));
+const uint32_t white = ds.gamma32(ds.Color(255, 255, 255));
+const uint32_t red = ds.gamma32(ds.Color(255, 0, 0));
+const uint32_t green = ds.gamma32(ds.Color(0, 255, 0));
+const uint32_t blue = ds.gamma32(ds.Color(0, 0, 255));
+const uint32_t cyan = ds.gamma32(ds.Color(0, 255, 255));
+const uint32_t magenta = ds.gamma32(ds.Color(255, 0, 255));
+const uint32_t yellow = ds.gamma32(ds.Color(255, 255, 0));
 
 //Define Brightness Levels
 const uint8_t b0 = (255 / 10) * 0;
@@ -55,6 +61,7 @@ void loop()
 	{
 		c = Serial.read();
 		parseB();
+		parseC();
 	}
 }
 
@@ -101,6 +108,41 @@ void parseB()
 		break;
 	case '9':
 		ds.setBrightness(b9);
+		ds.show();
+		break;
+	}
+}
+
+void parseC()
+{
+	switch (c)
+	{
+	case 'w':
+		ds.setPixelColor(0, white);
+		ds.show();
+		break;
+	case 'r':
+		ds.setPixelColor(0, red);
+		ds.show();
+		break;
+	case 'g':
+		ds.setPixelColor(0, green);
+		ds.show();
+		break;
+	case 'b':
+		ds.setPixelColor(0, blue);
+		ds.show();
+		break;
+	case 'c':
+		ds.setPixelColor(0, cyan);
+		ds.show();
+		break;
+	case 'm':
+		ds.setPixelColor(0, magenta);
+		ds.show();
+		break;
+	case 'y':
+		ds.setPixelColor(0, yellow);
 		ds.show();
 		break;
 	}
